@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Kanban</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+    <div class="row nav">
+        <li id="button-signUp" >Sign Up</li>
+        <li id="button-signIn">Sign In</li>
+        <a href="#" onclick="signOut();"><li id="button-signOut" >Sign out</li></a>
+    </div>
+
+    <div class="container register" >
+        <div class="row">
+          <div class="col-6">
+            <div class="signUpForm-left">
+
+            </div>
+          </div>
+          <div class="col-6">
+            <div  id = "signUpForm" class="signUpForm">
+                <h4> Sign Up </h4>
+                <form id="form-signUp" action="" method="POST">
+                    <label for="fname">Name:</label><br>
+                    <input type="text" id="name" name="name" value=""><br>
+                    <label for="fname">Email:</label><br>
+                    <input type="text" id="register-email" name="email" value=""><br>
+                    <label for="lname">Password:</label><br>
+                    <input type="password" id="register-password" name="password" value=""><br><br>
+                    <input type="submit" class="submit" id="button-signup-submit" value="Register">
+                    <input type="submit" class="submit" id="button-backsignup-submit" value="Login"> 
+                </form> 
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <div class="container login" style="display: none;">
+        <div class="row">
+          <div class="col-6">
+            <div class="signInForm-left">
+
+            </div>
+          </div>
+          <div class="col-6">
+            <div class = "signInForm" id ="signInForm">
+                <form id="form-signIn" action="" method="POST">
+                    <h4> Sign In </h4>
+                    <label for="fname">Email:</label><br>
+                    <input type="text" id="emailLogin" name="email" value="" required><br>
+                    <label for="lname">Password:</label><br>
+                    <input type="password" id="passwordLogin" name="password" value="" required><br><br>
+                    <input type="submit" class="submit" id="button-signin-submit" value="Submit">
+                    <input type="submit" class="submit" id="button-back-submit" value="Register"> 
+                  </form> 
+                  <br>
+                  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                  <br>
+                </div>
+          </div>
+        </div>
+      </div>
+
+    
+    <div class="container kanban" id="taskList" style="display: none;">
+        <br>
+        <h4>Your Task List</h4>
+        <br>
+        <div class="addtask">
+            <input type="button" class="submit" value="Add Task" id="input-add-task">
+        </div>
+        <div class="row" >
+
+            <div class="col-3 backlog">
+                <div class="mr-1 p-1 color-container" >
+
+                    <h3>Backlog</h3>
+
+                    <div class="card">
+                        <div class="card-body">
+    
+                          <p>Some quick example.</p>
+                          <div class="linkcard">
+                            <a href="#" >Card link </a>
+                            <a href="#" > Another link</a> 
+                          </div>
+
+                        </div>
+                     </div>
+                    
+    
+                      <div class="card">
+                        <div class="card-body">
+                          <p class="card-text">Some quick example.</p>
+                        </div>
+                      </div>
+                    
+
+                </div>
+            </div>
+
+            <div class="col-3 product">
+                <div class="mr-1 p-1 color-container" >
+                    <h3>Product</h3>
+                    <div class="card">
+                        <div class="card-body">
+                        <p class="card-text">Some quick example.</p>
+                        </div>
+                    </div>
+                
+                </div>
+                
+            </div>
+
+            <div class="col-3 development">
+                <div class="mr-1 p-1 color-container" >
+                    <h3>Development</h3>
+                    <div class="card">
+                        <div class="card-body">
+                                <p class="card-text">Some quick example.</p>
+                                </div>
+                            </div>
+    
+                            <div class="card">
+                                <div class="card-body">
+                                <p class="card-text">Some quick example.</p>
+                                </div>
+                            </div>
+    
+                            <div class="card">
+                                <div class="card-body">
+                                <p class="card-text">Some quick example.</p>
+                                </div>
+                            </div>
+                </div>                    
+            </div>
+
+            <div class="col-3 done">
+                <div class="mr-1 p-1 color-container" >
+                    <h3>Done</h3>
+                    <div class="card">
+                        <div class="card-body">
+                        <p class="card-text">Some quick example.</p>
+                        </div>
+                    </div>
+    
+                    <div class="card">
+                        <div class="card-body">
+                        <p class="card-text">Some quick example.</p>
+                        </div>
+                    </div>
+    
+                    <div class="card">
+                        <div class="card-body">
+                        <p class="card-text">Some quick example.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                        <p class="card-text">Some quick example.</p>
+                        </div>
+                    </div>
+            
+                    <div class="card">
+                        <div class="card-body">
+                        <p class="card-text">Some quick example.</p>
+                        </div>
+                    </div>
+    
+                    <div class="card">
+                        <div class="card-body">
+                        <p class="card-text">Some quick example.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</body>
+</html>
