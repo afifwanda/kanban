@@ -65,19 +65,19 @@ h4{
     padding: 10px 4px;
 }
 
-.product{
-    width: 100%;
-    height: 100%;
-    padding: 10px 4px;
-
-}
-.development{
+.todo{
     width: 100%;
     height: 100%;
     padding: 10px 4px;
 
 }
 .done{
+    width: 100%;
+    height: 100%;
+    padding: 10px 4px;
+
+}
+.complete{
     width: 100%;
     height: 100%;
     padding: 10px 4px;
@@ -128,7 +128,7 @@ h4{
 }
 
 .signInForm{
-    padding-top: 65px;
+    padding-top: 50px;
     text-align : center;
     font-family: "Lato";
     color: white;
