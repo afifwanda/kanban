@@ -17,7 +17,7 @@
         <a href="#" onclick="signOut();"><li id="button-signOut" v-if="signOutToggle">Sign out</li></a>
     </div>
 
-    <div class="container register"  v-if="register_box">
+    <div class="container register" id="registerBox" v-if="register_box">
         <div class="row">
           <div class="col-6">
             <div class="signUpForm-left">
@@ -42,7 +42,7 @@
         </div>
       </div>
 
-    <div class="container login" v-if="login_box">
+    <div class="container login" id="loginBox" v-if="login_box">
         <div class="row">
           <div class="col-6">
             <div class="signInForm-left">
@@ -84,22 +84,16 @@
 
                     <h3>Backlog</h3>
 
-                    <div class="card">
+                    <div class="card" v-for="element in backlog">
                         <div class="card-body">
-                          <p>Some quick example.</p>
+                          <p>{{ element.task }}</p>
+                          <p>{{ element.description }}</p>
                           <div class="linkcard">
-                            <a href="#" >Card link </a>
-                            <a href="#" > Another link</a> 
+                            <a href="#" >Edit Task</a>
+                            <a href="#" > Delete Task</a> 
                           </div>
                         </div>
                      </div>
-                    
-    
-                      <div class="card">
-                        <div class="card-body">
-                          <p class="card-text">Some quick example.</p>
-                        </div>
-                      </div>
                     
 
                 </div>
@@ -108,12 +102,16 @@
             <div class="col-3 todo">
                 <div class="mr-1 p-1 color-container todo" id="todo">
                     <h3>Todo</h3>
-                    <div class="card">
+                    <div class="card" v-for="element in todo">
                         <div class="card-body">
-                        <p class="card-text">Some quick example.</p>
+                          <p>{{ element.task }}</p>
+                          <p>{{ element.description }}</p>
+                          <div class="linkcard">
+                            <a href="#" >Edit Task</a>
+                            <a href="#" > Delete Task</a> 
+                          </div>
                         </div>
-                    </div>
-                
+                     </div>
                 </div>
                 
             </div>
@@ -121,35 +119,29 @@
             <div class="col-3 done">
                 <div class="mr-1 p-1 color-container done" id="done">
                     <h3>Done</h3>
-                    <div class="card">
+                    <div class="card" v-for="element in done">
                         <div class="card-body">
-                                <p class="card-text">Some quick example.</p>
-                                </div>
-                            </div>
-    
-                            <div class="card">
-                                <div class="card-body">
-                                <p class="card-text">Some quick example.</p>
-                                </div>
-                            </div>
-    
-                            <div class="card">
-                                <div class="card-body">
-                                <p class="card-text">Some quick example.</p>
-                                </div>
-                            </div>
+                          <p>{{ element.task }}</p>
+                          <p>{{ element.description }}</p>
+                          <div class="linkcard">
+                            <a href="#" >Edit Task</a>
+                            <a href="#" > Delete Task</a> 
+                          </div>
+                        </div>
+                     </div>
                 </div>                    
             </div>
 
             <div class="col-3 complete">
                 <div class="mr-1 p-1 color-container complete" id="complete" >
                     <h3>Complete</h3>
-                    <div class="card" v-for="element in card">
+                    <div class="card" v-for="element in completed">
                         <div class="card-body">
                           <p>{{ element.task }}</p>
+                          <p>{{ element.description }}</p>
                           <div class="linkcard">
-                            <a href="#" >Card link </a>
-                            <a href="#" > Another link</a> 
+                            <a href="#" >Edit Task</a>
+                            <a href="#" > Delete Task</a> 
                           </div>
                         </div>
                      </div>
@@ -160,8 +152,15 @@
         </div>
     </div>
 
+    <div class="container getTask" id="getTask">
+
+
     </div>
 
+
+
+    </div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
 
@@ -169,9 +168,24 @@
             el: '#app',
             data:{
                 card : [
-                    { task: 'Learn Javascript' },
-                    { task: 'Learn Vue' },
-                    { task: 'Build something awesome' }
+                    { 
+                      task: 'Learn Javascript',
+                      description: 'Learning javascript on hacktiv8',
+                      category : 'Backlog'
+                    },
+                    { task: 'Learn Vue',
+                      description: 'Learning vue on hacktiv8',
+                      category : 'Todo'
+                    },
+                    { task: 'Build something awesome',
+                      description: 'Build an app on hacktiv8',
+                      category : 'Done'
+                    },
+                    { task: 'Gradueate and get a job',
+                      description: 'Graduate from hacktiv8 and get a job',
+                      category : 'Completed'
+                    }
+
                 ],
                 register_box : localStorage.token? false:true,
                 kanban_box : localStorage.token? true:false,
@@ -189,11 +203,16 @@
                 registerButton: function(){
                     this.login_box = false;
                     this.register_box = true;
-                    
                 }
 
-
+            },
+            computed:{
+                backlog(){return this.card.filter((task) => task.category === "Backlog")},
+                todo(){return this.card.filter((task) => task.category === "Todo")},
+                done(){return this.card.filter((task) => task.category === "Done")},
+                completed(){return this.card.filter((task) => task.category === "Completed")}
             }
+
 
         })
 
