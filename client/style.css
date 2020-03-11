@@ -44,6 +44,12 @@ h4{
     font-size: 30px;
 }
 
+p.title{
+    font-family: "Lato";
+    font-weight: 400;
+    font-size: 16px;
+}
+
 .container.kanban {
    padding-top: 30px;
 }
@@ -84,6 +90,7 @@ h4{
     background-color: rgb(231, 231, 231);
 }
 
+
 .linkcard{
     display: flex;
     justify-content: space-around;
@@ -92,6 +99,9 @@ h4{
 .color-container{
     background-color: white;
     border-radius: 3px;
+    overflow: auto;
+    max-height: 100vh;
+    
 }
 
 .submit {
@@ -152,5 +162,12 @@ h4{
     background-image: url("./assets/register.png");
     height: 400px;
     width: 500px;
+}
+
+.addTaskForm{
+    padding-top: 75px;
+    text-align : center;
+    font-family: "Lato";
+    color: white;
 }
 
