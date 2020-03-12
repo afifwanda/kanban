@@ -89,8 +89,8 @@
                           <p class="title">{{ element.title }}</p>
                           <p>{{ element.description }}</p>
                           <div class="linkcard">
-                            <a href="#" >Edit Task</a>
-                            <a href="#" > Delete Task</a> 
+                            <input type="button" class="submit card edit" value="Edit" v-on:click="addButton">
+                            <input type="button" class="submit card delete" value="Delete" v-on:click="addButton">
                           </div>
                         </div>
                      </div>
@@ -107,8 +107,8 @@
                           <p class="title">{{ element.title }}</p>
                           <p>{{ element.description }}</p>
                           <div class="linkcard">
-                            <a href="#" >Edit Task</a>
-                            <a href="#" > Delete Task</a> 
+                            <input type="button" class="submit card edit" value="Edit" v-on:click="addButton">
+                            <input type="button" class="submit card delete" value="Delete" v-on:click="addButton">
                           </div>
                         </div>
                      </div>
@@ -124,8 +124,8 @@
                           <p class="title">{{ element.title }}</p>
                           <p>{{ element.description }}</p>
                           <div class="linkcard">
-                            <a href="#" >Edit Task</a>
-                            <a href="#" > Delete Task</a> 
+                            <input type="button" class="submit card edit" value="Edit" v-on:click="editButton(element.id)">
+                            <input type="button" class="submit card delete" value="Delete" v-on:click="deleteTask(element.id)">
                           </div>
                         </div>
                      </div>
@@ -140,8 +140,8 @@
                           <p>{{ element.task }}</p>
                           <p>{{ element.description }}</p>
                           <div class="linkcard">
-                            <a href="#" >Edit Task</a>
-                            <a href="#" > Delete Task</a> 
+                            <input type="button" class="submit card edit" value="Edit" v-on:click="addButton">
+                            <input type="button" class="submit card delete" value="Delete" v-on:click="addButton">
                           </div>
                         </div>
                      </div>
@@ -168,14 +168,37 @@
                     <option value="Done">Done</option>
                     <option value="Completed" selected>Completed</option>
                   </select><br><br>
-                <input type="submit" class="submit" id="button-signup-submit" value="Add Task" v-on:click.prevent="addTask">
-                <input type="submit" class="submit" id="button-backsignup-submit" value="Back" v-on:click="Back"> 
+                <input type="submit" class="submit" id="button-add-submit" value="Add Task" v-on:click.prevent="addTask">
+                <input type="submit" class="submit" id="button-backadd-submit" value="Back" v-on:click="Back"> 
+            </form> 
+        </div>
+    </div>
+
+    <div class="container editTask" v-if="edit_box">
+        <div  id = "editTaskForm" class="editTaskForm">
+            <h4> Edit Task </h4>
+            <form id="form-add" action="" method="POST" v-for="data in getCard">
+                <label for="fname">Title:</label><br>
+                <input type="text" id="title" name="title" value="" v-model:value="data.title"><br>
+                <label for="fname">Description:</label><br>
+                <input type="text" id="description" name="description" value="" v-model:value="data.description"><br>
+                <label for="lname">Category:</label><br>
+                <select id="Category" v-model:value="data.category">
+                    <option disabled selected>Select Category</option>
+                    <option value="Backlog">Backlog</option>
+                    <option value="Todo">Todo</option>
+                    <option value="Done">Done</option>
+                    <option value="Completed" selected>Completed</option>
+                  </select><br><br>
+                <input type="submit" class="submit" id="button-edit-submit" value="Edit Task" v-on:click.prevent="editTask(data.id)">
+                <input type="submit" class="submit" id="button-backedit-submit" value="Back" v-on:click="Back"> 
             </form> 
         </div>
     </div>
 
     </div>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
 
@@ -183,6 +206,7 @@
             el: '#app',
             data:{
                 card : [],
+                getCard : [],
                 baseUrl : 'http://localhost:3000',
                 token : localStorage.getItem('token'),
                 register_box : localStorage.token? false:true,
@@ -192,6 +216,7 @@
                 signInToggle : localStorage.token? false:true,
                 login_box : false,
                 add_box : false,
+                edit_box : false,
                 emailLogin : null,
                 passwordLogin : null,
                 nameRegister : null,
@@ -199,7 +224,10 @@
                 passwordRegister : null,
                 titleAdd : null,
                 descriptionAdd : null,
-                categoryAdd : null
+                categoryAdd : null,
+                titleEdit : null,
+                descriptionEdit : null,
+                categoryEdit: null
 
             },
             methods: {
@@ -218,8 +246,15 @@
                     this.add_box = true;
                 },
 
+                editButton: function(id){
+                    this.kanban_box = false;
+                    this.getEachTask(id)
+                    this.edit_box = true;
+                },
+
                 Back: function(){
                     this.kanban_box = true;
+                    this.edit_box = false;
                     this.add_box = false;
                 },
 
@@ -294,6 +329,79 @@
                         console.log(err)
                     })
                 },
+
+                getEachTask: function(id){
+                    axios({
+                        method: "GET",
+                        url : `${this.baseUrl}/task/${id}`,
+                        headers : {token: localStorage.getItem('token')}
+                    })
+                    .then(result=>{
+                        this.getCard = [result.data]
+                        console.log(this.getCard)
+                    })
+                    .catch(err=>{
+                        console.log(err)
+                    })
+                },
+
+                editTask: function(id){
+                    axios({
+                        method: "PUT",
+                        url : `${this.baseUrl}/task/${id}`,
+                        headers : {token: localStorage.getItem('token')},
+                        data : {
+                            title : this.titleEdit,
+                            description : this.descriptionEdit,
+                            category : this.categoryEdit
+                        }
+                    })
+                    .then(result=>{
+                        this.edit_box = false;
+                        this.getTask()
+                        this.kanban_box = true;
+                    })
+                    .catch(err=>{
+                        console.log(err)
+                    })
+
+                },
+
+                deleteTask: function(id){
+                    swal({
+                        title: "Are you sure?",
+                        text: "Once deleted, you will not be able to recover this imaginary file!",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                        if (willDelete) {
+                            axios({
+                                    method: "DELETE",
+                                    url : `${this.baseUrl}/task/${id}`,
+                                    headers : {token: localStorage.getItem('token')}
+                                })
+                                .then(result=>{
+                                    this.getTask()
+                                    this.kanban_box = true;
+                                })
+                                .catch(err=>{
+                                    console.log(err)
+                                })
+                            swal("Poof! Your imaginary file has been deleted!", {
+                            icon: "success",
+                            });
+                        } else {
+                            swal("Your imaginary file is safe!");
+                            this.getTask()
+                            this.kanban_box = true;
+                        }
+                        });
+
+
+                },
+
 
                 logout: function(){
                     localStorage.removeItem('token')

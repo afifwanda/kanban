@@ -116,6 +116,30 @@ p.title{
     border-radius : 3px;
   }
 
+  .submit.card.delete {
+    background-color: rgb(44, 44, 44);
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius : 3px;
+  }
+
+  .submit.card.edit {
+    background-color: rgb(25, 158, 67);
+    border: none;
+    color: white;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius : 3px;
+  }
+
 .addtask{
     width: 100%;
     text-align: center;
@@ -170,4 +194,12 @@ p.title{
     font-family: "Lato";
     color: white;
 }
+
+.editTaskForm{
+    padding-top: 75px;
+    text-align : center;
+    font-family: "Lato";
+    color: white;
+}
+
 
