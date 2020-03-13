@@ -1,6 +1,7 @@
 const { User } = require('../models/index.js')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
+const errorHandler = require('../middleware/errorHandler.js')
 require('dotenv').config()
 
 class UserController{

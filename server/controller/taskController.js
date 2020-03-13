@@ -62,7 +62,7 @@ class TaskController{
             }
         })
         .catch(err=>{
-            next({status: 501, msg: 'Internal server error!'}) 
+            next({status: 500, msg: 'Internal server error!'}) 
         })
     }
 
@@ -82,7 +82,7 @@ class TaskController{
              res.status(200).json(task)  
         })
         .catch(err=>{
-            next({status: 501, msg: 'Internal server error!'})
+            next({status: 500, msg: 'Internal server error!'})
         })
     }
 }
