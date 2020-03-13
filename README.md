@@ -1,10 +1,8 @@
 # kanban
 
-# third party
+# firebase link
 ```bash
-{
-    Google Auth
-}
+https://kanban-140e3.firebaseapp.com/
 ```
 
 # Server dependencies
@@ -42,6 +40,11 @@ CLIENT : http://localhost:1234
 # Server Tools
 ```bash
 Tools: NodeJS, Express, sequelize, postgresql
+```
+
+# Client Tools
+```bash
+Tools: Vue
 ```
 
 # .env example

@@ -11,11 +11,11 @@
                     <h4> Sign Up </h4>
                     <form id="form-signUp" action="" method="POST">
                         <label for="fname">Name:</label><br>
-                        <input type="text" id="name" name="name" value="" v-model="nameRegister"><br>
+                        <input type="text" id="name" name="name" value="" required v-model="nameRegister"><br>
                         <label for="fname">Email:</label><br>
-                        <input type="text" id="register-email" name="email" value="" v-model="emailRegister"><br>
+                        <input type="text" id="register-email" name="email" value="" required v-model="emailRegister"><br>
                         <label for="lname">Password:</label><br>
-                        <input type="password" id="register-password" name="password" value="" v-model="passwordRegister"><br><br>
+                        <input type="password" id="register-password" name="password" required value="" v-model="passwordRegister"><br><br>
                         <input type="submit" class="submit" id="button-signup-submit" value="Register" v-on:click.prevent="register()">
                         <input type="submit" class="submit" id="button-backsignup-submit" value="Login" v-on:click.prevent="loginButton()"> 
                     </form> 
